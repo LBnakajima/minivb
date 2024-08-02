@@ -180,7 +180,7 @@ const Top = () => {
           <h1 className="text-2xl font-bold">{currentDate}</h1>
           <button
             onClick={fetchParticipationData}
-            className="bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+            className="bg-white border border-gray-300 text-gray-600 hover:text-gray-800 hover:border-gray-800 font-bold py-2 px-4 rounded"
           >
             更新
           </button>

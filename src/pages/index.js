@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db, auth, storage } from "../firebaseConfig.js";
+import { useRouter } from "next/router";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    // リダイレクトする
+    router.push("/login");
+  }, [router]); // 依存関係配列に router を追加
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,16 +22,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  return (
-    <div>
-      <h1>Users</h1>
-      <ul>
-        {users.map((user, index) => (
-          <li key={index}>{user.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
+  return null; // リダイレクトのために何も表示しない
 };
 
 export default Home;
