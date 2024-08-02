@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "../firebaseConfig";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,8 +21,23 @@ const Login = () => {
         email,
         password
       );
-      console.log("Logged in as:", userCredential.user);
-      router.push("/top"); // ログイン成功後にトップページにリダイレクト
+      const user = userCredential.user;
+      console.log("Logged in as:", user);
+
+      // ユーザのauthorityを確認
+      const q = query(collection(db, "users"), where("uid", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        if (userData.authority === "admin") {
+          router.push("/topAdmin");
+        } else {
+          router.push("/top");
+        }
+      } else {
+        setError("User data not found");
+      }
     } catch (err) {
       setError(err.message);
     }

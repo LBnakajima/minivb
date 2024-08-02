@@ -45,6 +45,7 @@ const Registration = () => {
         name: name,
         gender: gender,
         birthdate: birthdate,
+        authority: "user", // authorityフィールドを追加
       });
       alert("User registered successfully!");
       router.push("/login"); // 登録成功後にログインページにリダイレクト

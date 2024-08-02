@@ -234,7 +234,7 @@ const Top = () => {
             onClick={handleTeamCheck}
             className="text-blue-500 font-bold py-2 px-4 border border-blue-500 hover:text-blue-800 hover:border-blue-800 rounded w-3/5"
           >
-            チームを確認
+            チームを確定
           </button>
         </div>
         <div className="flex flex-col items-center mt-12">
